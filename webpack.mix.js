@@ -1,7 +1,16 @@
+const path = require('path');
 const glob = require('glob-all');
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 const purgecssPlugin = require('purgecss-webpack-plugin');
+const config = {
+  resolve: {
+    alias: {
+      'core': path.resolve(__dirname, 'resources/assets/js/core'),
+      'chat': path.resolve(__dirname, 'resources/assets/js/components'),
+    },
+  },
+};
 
 mix.js('resources/assets/js/app.js', 'public/js')
   .options({
@@ -11,15 +20,11 @@ mix.js('resources/assets/js/app.js', 'public/js')
     ]
   });
 
-if (! mix.inProduction()) {
-  return;
-}
-
-mix.webpackConfig({
-  plugins: [
+if (mix.inProduction()) {
+  config['plugins'] = [
     new purgecssPlugin({
       paths: glob.sync([
-        path.join(__dirname, 'resources/assets/js/**/*.vue')
+        path.join(__dirname, 'resources/assets/js/**/*.vue'),
       ]),
 
       extractors: [
@@ -30,9 +35,11 @@ mix.webpackConfig({
             }
           },
 
-          extensions: ['html', 'js', 'vue']
-        }
-      ]
+          extensions: ['html', 'js', 'vue'],
+        },
+      ],
     })
-  ]
-});
+  ];
+}
+
+mix.webpackConfig(config);

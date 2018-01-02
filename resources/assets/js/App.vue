@@ -1,3 +1,14 @@
+<script>
+  import router from 'core/router';
+  import components from 'core/components';
+
+  export default {
+    router,
+    store,
+    components,
+  };
+</script>
+
 <template>
   <div></div>
 </template>
