@@ -1,16 +1,20 @@
 <script>
+  import data from 'core/store';
   import router from 'core/router';
   import components from 'core/components';
 
   export default {
+    data,
     router,
-    store,
     components,
   };
 </script>
 
 <template>
-  <div></div>
+  <div class="flex" style="padding-top: 60px">
+    <topbar></topbar>
+    <sidebar></sidebar>
+  </div>
 </template>
 
 <style>
@@ -28,6 +32,12 @@
  * See: https://github.com/tailwindcss/tailwindcss/issues/53#issuecomment-341413622
  */
 @tailwind preflight;
+
+p,
+input {
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+}
 
 /**
  * Here you would add any of your custom component classes; stuff that you'd
