@@ -1,3 +1,7 @@
-export default {
-
-};
+export default () => ({
+  store: {
+    sidebar: {
+      open: true,
+    },
+  },
+});
