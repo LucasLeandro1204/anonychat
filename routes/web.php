@@ -11,6 +11,6 @@
 |
 */
 
-Route::any('{all}', function () {
-    return view('app');
-})->where(['all' => '(?!api).*']);
+Route::get('/', function () {
+    return view('welcome');
+});
